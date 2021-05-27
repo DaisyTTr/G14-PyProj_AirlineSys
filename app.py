@@ -30,7 +30,7 @@ titlelabel.pack()
 
 # Label
 class label:
-    nameLabel = tk.Label(app, text="Your Name:")
+    nameLabel = tk.Label(app, text="Name:")
     nameLabel.place(x=630, y=70, anchor='w')
     nameLabel.config(bg="#6cb5f9")
 
@@ -71,47 +71,48 @@ window.create_window(500, 70, window=nameEntry)
 DOBEntry = tk.Entry(app)
 window.create_window(500, 100, window=DOBEntry)
 
+
 # storing info
 
-nameVar = StringVar(app)
-DOBVar = StringVar(app)
-fromVar = StringVar(app)
-toVar = StringVar(app)
-typeVar = StringVar(app)
-seatClassVar = StringVar(app)
-seatVar = StringVar(app)
-PIDVar = StringVar(app)
+# nameVar = StringVar(app)
+# DOBVar = StringVar(app)
+# fromVar = StringVar(app)
+# toVar = StringVar(app)
+# typeVar = StringVar(app)
+# seatClassVar = StringVar(app)
+# seatVar = StringVar(app)
+# PIDVar = StringVar(app)
 
 
 # combobox
 
-fromCb = ttk.Combobox(app, textvariable=fromVar, width=17)
+fromCb = ttk.Combobox(app , width=17)
 fromCb['values'] = ['NEW YORK', 'HANOI', "TOKYO", "BANGKOK", "PARIS", "LONDON"]
 fromCb.pack(ipadx=1, ipady=1, side=BOTTOM)
 fromCb.place(x=745, y=130, anchor='w')
 # fromCb.current(0)
 
 
-toCb = ttk.Combobox(app, textvariable=toVar, width=17)
+toCb = ttk.Combobox(app, width=17)
 toCb['values'] = ['NEW YORK', 'HANOI', "TOKYO", "BANGKOK", "PARIS", "LONDON"]
 toCb.pack(ipadx=1, ipady=1, side=BOTTOM)
 toCb.place(x=745, y=160, anchor='w')
 # toCb.current(0)
 
-typeCb = ttk.Combobox(app, textvariable=typeVar, width=17)
+typeCb = ttk.Combobox(app, width=17)
 typeCb['values'] = ['SILVER', 'GOLD', "PLATINIUM"]
 typeCb.pack(ipadx=1, ipady=1, side=BOTTOM)
 typeCb.place(x=745, y=190, anchor='w')
 # typeCb.current(0)
 
 
-seatClassCb = ttk.Combobox(app, textvariable=seatClassVar, width=17)
+seatClassCb = ttk.Combobox(app, width=17)
 seatClassCb['values'] = ['A', 'B', "C", "S"]
 seatClassCb.pack(ipadx=1, ipady=1, side=BOTTOM)
 seatClassCb.place(x=745, y=220, anchor='w')
 # seatClassCb.current(0)
 
-seatCb = ttk.Combobox(app, textvariable=seatVar, width=17)
+seatCb = ttk.Combobox(app, width=17)
 seatCb['values'] = ['111', '222', "333", "444", "555",
                     "666", "777", "888", "999", "1000",
                     "1000", "1111", "2222", "3333", "4444", "5555",
@@ -120,7 +121,7 @@ seatCb.pack(ipadx=1, ipady=1, side=BOTTOM)
 seatCb.place(x=745, y=250, anchor='w')
 
 
-PIDCb = ttk.Combobox(app, textvariable=PIDVar, width=17)
+PIDCb = ttk.Combobox(app, width=17)
 PIDCb['values'] = ['VietNam Airline', 'Pacific Airlines', "VASCO", "VietJet Air", "Vietstar Airlines",
                    "Bamboo Airways", "Vietravel Airlines", "Thai Airways",
                    "Philippine Airlines", "Garuda Indonesia", "Singapore Airlines", "Malaysia Airlines",
@@ -171,13 +172,20 @@ def submit():
                  'Seat Class': seatClass , 'Seat': seat, 'PID': pID })
 
     msg.showinfo("Your Information", "Your Information recorded")
+    
+    
+
+    
+    
+    
+
 
 
 
     
 buttonSrc = tk.Button(app, text="Submit", command= submit)
-
+buttonSrc.place(x=745, y=330)
 buttonSrc.pack()
 
-
 app.mainloop()
+print(user[0])
