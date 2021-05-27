@@ -1,0 +1,244 @@
+--Create table AirPort
+USE [AirlineBookingInformationManagementSystem]
+GO
+
+/****** Object:  Table [dbo].[Airport]    Script Date: 5/18/2021 11:10:22 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Airport](
+	[AID] [nchar](10) NOT NULL,
+	[AName] [nvarchar](50) NOT NULL,
+	[ANational] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_Airport] PRIMARY KEY CLUSTERED 
+(
+	[AID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+--Create table Fight
+USE [AirlineBookingInformationManagementSystem]
+GO
+
+/****** Object:  Table [dbo].[Flight]    Script Date: 5/18/2021 11:11:43 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Flight](
+	[FID] [nchar](10) NOT NULL,
+	[PID] [nchar](10) NOT NULL,
+	[AIDFrom] [nchar](10) NOT NULL,
+	[AIDTo] [nchar](10) NOT NULL,
+	[DateF] [date] NULL,
+ CONSTRAINT [PK_Flight] PRIMARY KEY CLUSTERED 
+(
+	[FID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Flight]  WITH CHECK ADD  CONSTRAINT [FK_Flight_Airport] FOREIGN KEY([AIDFrom])
+REFERENCES [dbo].[Airport] ([AID])
+GO
+
+ALTER TABLE [dbo].[Flight] CHECK CONSTRAINT [FK_Flight_Airport]
+GO
+
+ALTER TABLE [dbo].[Flight]  WITH CHECK ADD  CONSTRAINT [FK_Flight_Airport1] FOREIGN KEY([AIDTo])
+REFERENCES [dbo].[Airport] ([AID])
+GO
+
+ALTER TABLE [dbo].[Flight] CHECK CONSTRAINT [FK_Flight_Airport1]
+GO
+
+ALTER TABLE [dbo].[Flight]  WITH CHECK ADD  CONSTRAINT [FK_Flight_Plane] FOREIGN KEY([PID])
+REFERENCES [dbo].[Plane] ([PID])
+GO
+
+ALTER TABLE [dbo].[Flight] CHECK CONSTRAINT [FK_Flight_Plane]
+GO
+
+
+
+--Create table Plane
+USE [AirlineBookingInformationManagementSystem]
+GO
+
+/****** Object:  Table [dbo].[Plane]    Script Date: 5/18/2021 11:12:28 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Plane](
+	[PID] [nchar](10) NOT NULL,
+	[Type] [nvarchar](10) NOT NULL,
+	[Class] [nchar](1) NOT NULL,
+	[Seat] [nchar](10) NOT NULL,
+ CONSTRAINT [PK_Plane] PRIMARY KEY CLUSTERED 
+(
+	[PID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+
+--Create table Staff
+USE [AirlineBookingInformationManagementSystem]
+GO
+
+/****** Object:  Table [dbo].[Staff]    Script Date: 5/18/2021 11:12:47 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Staff](
+	[SID] [nchar](10) NOT NULL,
+	[SName] [nvarchar](50) NOT NULL,
+	[SDOB] [date] NULL,
+	[SUsername] [nvarchar](50) NOT NULL,
+	[SPassword] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_Staff] PRIMARY KEY CLUSTERED 
+(
+	[SID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+
+--Create table Ticket
+USE [AirlineBookingInformationManagementSystem]
+GO
+
+/****** Object:  Table [dbo].[Ticket]    Script Date: 5/18/2021 11:13:04 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Ticket](
+	[TID] [nchar](10) NOT NULL,
+	[FID] [nchar](10) NOT NULL,
+	[PassangerName] [nvarchar](50) NOT NULL,
+	[Passport] [nvarchar](50) NOT NULL,
+	[TPrice] [money] NOT NULL,
+ CONSTRAINT [PK_Ticket] PRIMARY KEY CLUSTERED 
+(
+	[TID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Ticket]  WITH CHECK ADD  CONSTRAINT [FK_Ticket_Flight] FOREIGN KEY([FID])
+REFERENCES [dbo].[Flight] ([FID])
+GO
+
+ALTER TABLE [dbo].[Ticket] CHECK CONSTRAINT [FK_Ticket_Flight]
+GO
+
+
+
+--Insert value into Airport
+INSERT INTO Airport VALUES ('VNA','VietNamAirline','VietNam')
+INSERT INTO Airport VALUES ('PA','PacificAirlines','VietNam')
+INSERT INTO Airport VALUES ('VSC','VASCO','VietNam')
+INSERT INTO Airport VALUES ('VJA','VietJetAir','VietNam')
+INSERT INTO Airport VALUES ('VSA','VietstarAirlines','VietNam')
+INSERT INTO Airport VALUES ('BBA','BambooAirways','VietNam')
+INSERT INTO Airport VALUES ('VTA','VietravelAirlines','VietNam')
+INSERT INTO Airport VALUES ('TA','ThaiAirways','Thailand')
+INSERT INTO Airport VALUES ('PLPA','PhilippineAirlines','Philippine')
+INSERT INTO Airport VALUES ('GIA','GarudaIndonesia','Indonesia')
+INSERT INTO Airport VALUES ('SGPA','SingaporeAirlines','Singapore')
+INSERT INTO Airport VALUES ('MLA','MalaysiaAirlines','Malaysia')
+INSERT INTO Airport VALUES ('CNA','AirChina','China')
+INSERT INTO Airport VALUES ('JPA','JapanAirlines','Japan')
+INSERT INTO Airport VALUES ('CANA','AirCanada','Canada')
+INSERT INTO Airport VALUES ('AFA','AirFrance','France')
+INSERT INTO Airport VALUES ('IDA','AirIndia','India')
+INSERT INTO Airport VALUES ('AAA','AsianaAirlines','Korea')
+INSERT INTO Airport VALUES ('AEA','AeroContractors','USA')
+
+--Insert value into Flight
+INSERT INTO Flight VALUES ('F111','P111','VNA','PA',null)
+INSERT INTO Flight VALUES ('F222','P222','PA','VSC',null)
+INSERT INTO Flight VALUES ('F333','P333','VSC','VJA',null)
+INSERT INTO Flight VALUES ('F444','P444','VJA','VSA',null)
+INSERT INTO Flight VALUES ('F555','P555','VSA','BBA',null)
+INSERT INTO Flight VALUES ('F666','P666','BBA','VTA',null)
+INSERT INTO Flight VALUES ('F777','P777','VTA','TA',null)
+INSERT INTO Flight VALUES ('F888','P888','TA','PLPA',null)
+INSERT INTO Flight VALUES ('F999','P999','PLPA','GIA',null)
+INSERT INTO Flight VALUES ('F1000','P1000','GIA','SGPA',null)
+INSERT INTO Flight VALUES ('F1111','P1111','SGPA','MLA',null)
+INSERT INTO Flight VALUES ('F2222','P2222','MLA','CNA',null)
+INSERT INTO Flight VALUES ('F3333','P3333','CNA','JPA',null)
+INSERT INTO Flight VALUES ('F4444','P4444','JPA','CANA',null)
+INSERT INTO Flight VALUES ('F5555','P5555','CANA','AFA',null)
+INSERT INTO Flight VALUES ('F6666','P6666','AFA','IDA',null)
+INSERT INTO Flight VALUES ('F7777','P7777','IDA','AAA',null)
+INSERT INTO Flight VALUES ('F8888','P8888','AAA','AEA',null)
+
+--Insert value into Plane
+INSERT INTO Plane VALUES ('P111','Gold','A','111')
+INSERT INTO Plane VALUES ('P222','Platinium','B','222')
+INSERT INTO Plane VALUES ('P333','Silver','A','333')
+INSERT INTO Plane VALUES ('P444','Gold','C','444')
+INSERT INTO Plane VALUES ('P555','Platinium','S','555')
+INSERT INTO Plane VALUES ('P666','Gold','S','666')
+INSERT INTO Plane VALUES ('P777','Platinium','B','777')
+INSERT INTO Plane VALUES ('P888','Silver','C','888')
+INSERT INTO Plane VALUES ('P999','Platinium','S','999')
+INSERT INTO Plane VALUES ('P1000','Silver','S','1000')
+INSERT INTO Plane VALUES ('P1111','Silver','A','1111')
+INSERT INTO Plane VALUES ('P2222','Gold','B','2222')
+INSERT INTO Plane VALUES ('P3333','Platinium','S','3333')
+INSERT INTO Plane VALUES ('P4444','Platinium','C','4444')
+INSERT INTO Plane VALUES ('P5555','Gold','B','5555')
+INSERT INTO Plane VALUES ('P6666','Silver','A','6666')
+
+--Insert value into Staff
+INSERT INTO Staff VALUES ('S1','Captain America',null,'CaptainAmerica','CaptainAmerica')
+INSERT INTO Staff VALUES ('S2','Iron Man',null,'IronMan','IronMan')
+INSERT INTO Staff VALUES ('S3','Black Widow',null,'BlackWidow','BlackWidow')
+INSERT INTO Staff VALUES ('S4','Thanos',null,'Thanos','Thanos')
+INSERT INTO Staff VALUES ('S5','Thor',null,'Thor','Thor')
+INSERT INTO Staff VALUES ('S6','Scarlet Witch',null,'ScarletWitch','ScarletWitch')
+INSERT INTO Staff VALUES ('S7','Spider Man',null,'SpiderMan','SpiderMan')
+INSERT INTO Staff VALUES ('S8','Hulk',null,'Hulk','Hulk')
+INSERT INTO Staff VALUES ('S9','Black Panther',null,'BlackPanther','BlackPanther')
+INSERT INTO Staff VALUES ('S10','Doctor Strange',null,'DoctorStrange','DoctorStrange')
+INSERT INTO Staff VALUES ('S11','Clint Barton',null,'ClintBarton','ClintBarton')
+INSERT INTO Staff VALUES ('S12','Loki',null,'Loki','Loki')
+INSERT INTO Staff VALUES ('S13','Vision',null,'Vision','Vision')
+INSERT INTO Staff VALUES ('S14','Groot',null,'Groot','Groot')
+
+--Insert calue into Ticket
+INSERT INTO Ticket VALUES ('T1','F111','Bat Man','BMPP',111)
+INSERT INTO Ticket VALUES ('T2','F222','Super Man','SPMPP',222)
+INSERT INTO Ticket VALUES ('T3','F333','OK Man','OKMPP',333)
+INSERT INTO Ticket VALUES ('T4','F444','Wassup Man','WMPP',444)
+INSERT INTO Ticket VALUES ('T5','F555','Ant Man','AMPP',555)
+INSERT INTO Ticket VALUES ('T6','F666','X Man','XMPP',666)
+INSERT INTO Ticket VALUES ('T7','F777','Python Man','PYMPP',777)
+INSERT INTO Ticket VALUES ('T8','F888','Quit Man','QMPP',888)
+INSERT INTO Ticket VALUES ('T9','F999','One Punch Man','OPMPP',999)
+
+
+
+
+
