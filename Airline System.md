@@ -57,15 +57,7 @@ Lê Duy Anh Bi9-034</p>
 <blockquote>
 <ul>
 <li>Airlines booking class: manage all the operation of Airlines booking.</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
 <li>Staff class: manage all the operation of staff.</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
 <li>Ticket booking class: manage all the operation of Ticket booking.</li>
 </ul>
 </blockquote>
